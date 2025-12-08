@@ -1,0 +1,8 @@
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\bin\Debug\net6.0\QuickHeal.deps.json
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\bin\Debug\net6.0\QuickHeal.dll
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\obj\Debug\net6.0\QuickHeal.csproj.AssemblyReference.cache
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\obj\Debug\net6.0\QuickHeal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\obj\Debug\net6.0\QuickHeal.AssemblyInfoInputs.cache
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\obj\Debug\net6.0\QuickHeal.AssemblyInfo.cs
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\obj\Debug\net6.0\QuickHeal.csproj.CoreCompileInputs.cache
+C:\Users\Steven\Documents\Projects\stardew-quickheal\QuickHeal\obj\Debug\net6.0\QuickHeal.dll
