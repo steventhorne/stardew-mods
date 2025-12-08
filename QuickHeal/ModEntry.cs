@@ -25,10 +25,8 @@ namespace QuickHeal
 
         private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
         {
-            Monitor.Log($"Game Launched", LogLevel.Debug);
             var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
             if (configMenu is null) return;
-            Monitor.Log($"Config menu found", LogLevel.Debug);
 
             configMenu.Register(
                 mod: ModManifest,
@@ -57,18 +55,12 @@ namespace QuickHeal
             Object firstFood = null;
             foreach (var item in Game1.player.Items)
             {
-                if (item == null)
-                {
-                    Monitor.Log("NULL", LogLevel.Debug);
-                    continue;
-                }
-
-                Monitor.Log($"{item.Name} {item.TypeDefinitionId}", LogLevel.Debug);
                 if (item == null) continue;
                 if (item.TypeDefinitionId != "(O)") continue;
+
                 var obj = (Object)item;
-                Monitor.Log($"{obj.Edibility}", LogLevel.Debug);
                 if (obj.Edibility <= 0) continue;
+
                 firstFood = obj;
                 break;
             }
