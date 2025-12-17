@@ -1,0 +1,10 @@
+{
+    "Name": "DevTools",
+    "Author": "steventhorne",
+    "Version": "1.0.0",
+    "Description": "Provides several useful tools during mod development.",
+    "UniqueID": "steventhorne.DevTools",
+    "EntryDll": "DevTools.dll",
+    "MinimumApiVersion": "4.0.0",
+    "UpdateKeys": []
+}

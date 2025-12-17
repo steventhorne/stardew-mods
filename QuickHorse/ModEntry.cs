@@ -2,17 +2,25 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using GenericModConfigMenu;
+using System.Linq;
+using System;
 
-namespace QuickHeal
+namespace QuickHorse
 {
     public sealed class ModConfig
     {
         public SButton Keybind { get; set; } = SButton.H;
+        public bool SkipDelay { get; set; }
+        public bool RequireFlute { get; set; } = true;
     }
 
     internal sealed class ModEntry : Mod
     {
         private ModConfig Config;
+
+        private readonly Lazy<StardewValley.Object> Flute = new(() => ItemRegistry.Create<StardewValley.Object>(HORSE_FLUTE_ID));
+
+        private const string HORSE_FLUTE_ID = ItemRegistry.type_object + "911";
 
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
@@ -36,9 +44,23 @@ namespace QuickHeal
 
             configMenu.AddKeybind(
                 mod: ModManifest,
-                name: () => "Quick Heal",
+                name: () => "Keybind",
                 getValue: () => Config.Keybind,
                 setValue: value => Config.Keybind = value
+            );
+
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Skip Delay",
+                getValue: () => Config.SkipDelay,
+                setValue: value => Config.SkipDelay = value
+            );
+
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Require Flute in Inventory",
+                getValue: () => Config.RequireFlute,
+                setValue: value => Config.RequireFlute = value
             );
         }
 
@@ -48,28 +70,29 @@ namespace QuickHeal
         private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
         {
             // ignore if player hasn't loaded a save yet
-            if (!Context.IsWorldReady) return;
+            if (!Context.IsWorldReady || !Context.IsPlayerFree) return;
+            if (Config.Keybind == SButton.None) return;
             if (e.Button != Config.Keybind) return;
-            if (Game1.player.isEating) return;
 
-            Object firstFood = null;
-            foreach (var item in Game1.player.Items)
+            if (Config.RequireFlute)
             {
-                if (item == null) continue;
-                if (item.TypeDefinitionId != ItemRegistry.type_object) continue;
-
-                var obj = (Object)item;
-                if (obj.Edibility <= 0) continue;
-
-                firstFood = obj;
-                break;
+                var hasFlute = Game1.player.Items.Any(i => i?.QualifiedItemId == HORSE_FLUTE_ID);
+                if (!hasFlute) return;
             }
 
-            if (firstFood != null)
+            if (Config.SkipDelay)
             {
-                if (firstFood.Stack > 1) firstFood.Stack--;
-                else Game1.player.removeItemFromInventory(firstFood);
-                Game1.player.eatObject(firstFood, true);
+                Game1.MusicDuckTimer = 2000f;
+                Game1.playSound("horse_flute");
+                string horseWarpErrorMessage = Utility.GetHorseWarpErrorMessage(Utility.GetHorseWarpRestrictionsForFarmer(Game1.player));
+                if (horseWarpErrorMessage != null)
+                    Game1.showRedMessage(horseWarpErrorMessage);
+                else
+                    Game1.player.team.requestHorseWarpEvent.Fire(Game1.player.UniqueMultiplayerID);
+            }
+            else
+            {
+                Flute.Value.performUseAction(Game1.currentLocation);
             }
         }
     }

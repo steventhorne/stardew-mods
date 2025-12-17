@@ -1,0 +1,10 @@
+{
+    "Name": "QuickHorse",
+    "Author": "steventhorne",
+    "Version": "1.0.0",
+    "Description": "Adds a keybind to quickly summon your horse using a horse flute.",
+    "UniqueID": "steventhorne.QuickHorse",
+    "EntryDll": "QuickHorse.dll",
+    "MinimumApiVersion": "4.0.0",
+    "UpdateKeys": []
+}
