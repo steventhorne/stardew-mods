@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,7 +6,7 @@ namespace Common.UI;
 
 public class ColumnWidget : Widget
 {
-    public IEnumerable<Widget> Children { get; init; }
+    public Widget[] Children { get; init; }
     public int Gap { get; init; }
 
     public ColumnWidget() { }
@@ -21,39 +19,57 @@ public class ColumnWidget : Widget
             child.Init(this);
     }
 
-    public override void CalculateSizes(Rectangle constraints)
+    public override void CalculateSizes(Point constraints)
     {
-        int heightConstraint = constraints.Height / Children.Count();
+        int heightConstraint = constraints.Y / Children.Length;
         int width = 0;
         int height = 0;
         var i = 0;
         foreach (var child in Children)
         {
-            child.CalculateSizes(new Rectangle(constraints.X, constraints.Y + height, constraints.Width, heightConstraint));
-            child.SetLocation(constraints.X, constraints.Y + height);
+            child.CalculateSizes(new Point(constraints.X, heightConstraint));
+            child.SetLocation(0, height);
             var childSize = child.Rect.Size;
             if (childSize.X > width) width = childSize.X;
             height += childSize.Y;
-            if (i < Children.Count() && heightConstraint > childSize.Y)
+            if (i < Children.Length && heightConstraint > childSize.Y)
                 height += System.Math.Min(heightConstraint - childSize.Y, Gap);
             i++;
         }
         SetSize(width, height);
     }
 
-    public override bool TryReceiveLeftClick(int x, int y, bool playSound)
+    public override bool TryReceiveLeftClick(int x, int y, bool playSound, Point offset)
+    {
+        if (!Rect.Contains(x, y)) return false;
+        offset += Rect.Location;
+
+        foreach (var child in Children)
+        {
+            if (child.TryReceiveLeftClick(x, y, playSound, offset))
+                return true;
+        }
+
+        return false;
+    }
+
+    public override bool TryReceiveRightClick(int x, int y, bool playSound, Point offset)
     {
         throw new System.NotImplementedException();
     }
 
-    public override bool TryReceiveRightClick(int x, int y, bool playSound)
+    public override bool TryReceiveScrollWheelAction(int x, int y, int direction, Point offset)
     {
-        throw new System.NotImplementedException();
-    }
+        if (!Rect.Contains(x, y)) return false;
+        offset += Rect.Location;
 
-    public override bool TryReceiveScrollWheelAction(int direction)
-    {
-        throw new System.NotImplementedException();
+        foreach (var child in Children)
+        {
+            if (child.TryReceiveScrollWheelAction(x, y, direction, offset))
+                return true;
+        }
+
+        return false;
     }
 
     public override bool TryReceiveGamePadButton(Buttons button)
@@ -61,9 +77,11 @@ public class ColumnWidget : Widget
         throw new System.NotImplementedException();
     }
 
-    public override void Draw(SpriteBatch b)
+    public override void Draw(SpriteBatch b, Point offset)
     {
+        offset += Rect.Location;
+
         foreach (var child in Children)
-            child.Draw(b);
+            child.Draw(b, offset);
     }
 }

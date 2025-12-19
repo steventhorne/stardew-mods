@@ -22,10 +22,10 @@ namespace Common.UI
 
         public void Init()
         {
-            Init(new Rectangle(0, 0, Game1.uiViewport.Width, Game1.uiViewport.Height));
+            Init(new Point(Game1.uiViewport.Width, Game1.uiViewport.Height));
         }
 
-        public void Init(Rectangle constraints)
+        public void Init(Point constraints)
         {
             Init(null);
 
@@ -57,13 +57,13 @@ namespace Common.UI
             Rect = new Rectangle(Rect.X, Rect.Y, size.X, size.Y);
         }
 
-        public abstract void CalculateSizes(Rectangle constraints);
+        public abstract void CalculateSizes(Point constraints);
 
-        public abstract bool TryReceiveLeftClick(int x, int y, bool playSound);
-        public abstract bool TryReceiveRightClick(int x, int y, bool playSound);
-        public abstract bool TryReceiveScrollWheelAction(int direction);
+        public abstract void Draw(SpriteBatch b, Point offset);
+
+        public abstract bool TryReceiveLeftClick(int x, int y, bool playSound, Point offset);
+        public abstract bool TryReceiveRightClick(int x, int y, bool playSound, Point offset);
+        public abstract bool TryReceiveScrollWheelAction(int x, int y, int direction, Point offset);
         public abstract bool TryReceiveGamePadButton(Buttons button);
-
-        public abstract void Draw(SpriteBatch b);
     }
 }

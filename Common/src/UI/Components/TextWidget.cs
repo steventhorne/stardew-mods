@@ -17,23 +17,23 @@ namespace Common.UI
 
         public TextWidget() { }
 
-        public override void CalculateSizes(Rectangle constraints)
+        public override void CalculateSizes(Point constraints)
         {
             TextSize = Font.MeasureString(Data).ToPoint();
 
             var actualSize = new Point(
-                Math.Min(constraints.Size.X, TextSize.X),
-                Math.Min(constraints.Size.Y, TextSize.Y)
+                Math.Min(constraints.X, TextSize.X),
+                Math.Min(constraints.Y, TextSize.Y)
             );
             SetSize(actualSize);
         }
 
-        public override void Draw(SpriteBatch b)
+        public override void Draw(SpriteBatch b, Point offset)
         {
             if (WithShadow)
-                Utility.drawTextWithShadow(b, Data, Font, Rect.Location.ToVector2(), Color);
+                Utility.drawTextWithShadow(b, Data, Font, (offset + Rect.Location).ToVector2(), Color);
             else
-                b.DrawString(Font, Data, Rect.Location.ToVector2(), Color);
+                b.DrawString(Font, Data, (offset + Rect.Location).ToVector2(), Color);
         }
 
         public override bool TryReceiveGamePadButton(Buttons button)
@@ -41,19 +41,19 @@ namespace Common.UI
             throw new NotImplementedException();
         }
 
-        public override bool TryReceiveLeftClick(int x, int y, bool playSound)
+        public override bool TryReceiveLeftClick(int x, int y, bool playSound, Point offset)
+        {
+            return false;
+        }
+
+        public override bool TryReceiveRightClick(int x, int y, bool playSound, Point offset)
         {
             throw new NotImplementedException();
         }
 
-        public override bool TryReceiveRightClick(int x, int y, bool playSound)
+        public override bool TryReceiveScrollWheelAction(int x, int y, int direction, Point offset)
         {
-            throw new NotImplementedException();
-        }
-
-        public override bool TryReceiveScrollWheelAction(int direction)
-        {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }

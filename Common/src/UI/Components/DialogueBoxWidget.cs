@@ -31,36 +31,38 @@ public class DialogueBoxWidget : Widget
         Child?.Init(this);
     }
 
-    public override void CalculateSizes(Rectangle constraints)
+    public override void CalculateSizes(Point constraints)
     {
-        SetSize(constraints.Size);
+        SetSize(constraints);
 
         int titleReserve = 0;
         if (TitleWidget != null)
         {
             TitleWidget.CalculateSizes(constraints);
-            TitleWidget.SetLocation((Rect.Width / 2) - (TitleWidget.Size.X / 2), constraints.Y + IClickableMenu.borderWidth);
+            TitleWidget.SetLocation((Rect.Width / 2) - (TitleWidget.Size.X / 2), IClickableMenu.borderWidth);
             titleReserve += TitleWidget.Size.Y + TITLE_MARGIN_BOTTOM;
         }
 
         if (Child != null)
         {
             var childConstraints = new Rectangle(
-                constraints.X + IClickableMenu.borderWidth,
-                constraints.Y + IClickableMenu.borderWidth + titleReserve,
-                constraints.Width - (IClickableMenu.borderWidth * 2),
-                constraints.Height - (IClickableMenu.borderWidth * 2) - titleReserve
+                IClickableMenu.borderWidth,
+                IClickableMenu.borderWidth + titleReserve,
+                constraints.X - (IClickableMenu.borderWidth * 2),
+                constraints.Y - (IClickableMenu.borderWidth * 2) - titleReserve
             );
-            Child.CalculateSizes(childConstraints);
+            Child.CalculateSizes(childConstraints.Size);
             Child.SetLocation(childConstraints.Location);
         }
     }
 
-    public override void Draw(SpriteBatch b)
+    public override void Draw(SpriteBatch b, Point offset)
     {
-        Game1.drawDialogueBox(Rect.X, Rect.Y - 64, Rect.Width, Rect.Height + 64, false, true);
-        TitleWidget.Draw(b);
-        Child.Draw(b);
+        offset += Rect.Location;
+
+        Game1.drawDialogueBox(offset.X + Rect.X, offset.Y + Rect.Y - 64, Rect.Width, Rect.Height + 64, false, true);
+        TitleWidget.Draw(b, offset);
+        Child.Draw(b, offset);
     }
 
     public override bool TryReceiveGamePadButton(Buttons button)
@@ -68,18 +70,24 @@ public class DialogueBoxWidget : Widget
         throw new System.NotImplementedException();
     }
 
-    public override bool TryReceiveLeftClick(int x, int y, bool playSound)
+    public override bool TryReceiveLeftClick(int x, int y, bool playSound, Point offset)
+    {
+        if (!Rect.Contains(x, y)) return false;
+        offset += Rect.Location;
+
+        return Child.TryReceiveLeftClick(x, y, playSound, offset);
+    }
+
+    public override bool TryReceiveRightClick(int x, int y, bool playSound, Point offset)
     {
         throw new System.NotImplementedException();
     }
 
-    public override bool TryReceiveRightClick(int x, int y, bool playSound)
+    public override bool TryReceiveScrollWheelAction(int x, int y, int direction, Point offset)
     {
-        throw new System.NotImplementedException();
-    }
+        if (!Rect.Contains(x, y)) return false;
+        offset += Rect.Location;
 
-    public override bool TryReceiveScrollWheelAction(int direction)
-    {
-        throw new System.NotImplementedException();
+        return Child.TryReceiveScrollWheelAction(x, y, direction, offset);
     }
 }
