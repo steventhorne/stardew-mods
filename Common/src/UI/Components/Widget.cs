@@ -56,6 +56,16 @@ namespace Common.UI
         {
             Rect = new Rectangle(Rect.X, Rect.Y, size.X, size.Y);
         }
+        
+        protected bool ContainsPoint(int x, int y, Point offset)
+        {
+            return Rect.Contains(x - offset.X, y - offset.Y);
+        }
+
+        protected bool ContainsPoint(Point point, Point offset)
+        {
+            return Rect.Contains(point.X - offset.X, point.Y - offset.Y);
+        }
 
         public abstract void CalculateSizes(Point constraints);
 

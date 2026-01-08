@@ -77,8 +77,8 @@ public class ScrollViewWidget : Widget
 
     public override bool TryReceiveLeftClick(int x, int y, bool playSound, Point offset)
     {
-        if (!Rect.Contains(x, y)) return false;
-        offset += Rect.Location;
+        if (!ContainsPoint(x, y, offset)) return false;
+        offset += new Point(Rect.Location.X, Rect.Location.Y - ScrollPosition);
 
         foreach (var child in Children)
         {
@@ -91,13 +91,22 @@ public class ScrollViewWidget : Widget
 
     public override bool TryReceiveRightClick(int x, int y, bool playSound, Point offset)
     {
-        throw new NotImplementedException();
+        if (!ContainsPoint(x, y, offset)) return false;
+        offset += new Point(Rect.Location.X, Rect.Location.Y - ScrollPosition);
+
+        foreach (var child in Children)
+        {
+            if (child.TryReceiveRightClick(x, y, playSound, offset))
+                return true;
+        }
+
+        return false;
     }
 
     public override bool TryReceiveScrollWheelAction(int x, int y, int direction, Point offset)
     {
-        if (!Rect.Contains(x, y)) return false;
-        offset += Rect.Location;
+        if (!ContainsPoint(x, y, offset)) return false;
+        offset += new Point(Rect.Location.X, Rect.Location.Y - ScrollPosition);
 
         foreach (var child in Children)
         {

@@ -38,7 +38,7 @@ namespace Common.UI
 
         public override bool TryReceiveGamePadButton(Buttons button)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override bool TryReceiveLeftClick(int x, int y, bool playSound, Point offset)
@@ -48,7 +48,7 @@ namespace Common.UI
 
         public override bool TryReceiveRightClick(int x, int y, bool playSound, Point offset)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public override bool TryReceiveScrollWheelAction(int x, int y, int direction, Point offset)

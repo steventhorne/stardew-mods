@@ -72,7 +72,7 @@ public class DialogueBoxWidget : Widget
 
     public override bool TryReceiveLeftClick(int x, int y, bool playSound, Point offset)
     {
-        if (!Rect.Contains(x, y)) return false;
+        if (!ContainsPoint(x, y, offset)) return false;
         offset += Rect.Location;
 
         return Child.TryReceiveLeftClick(x, y, playSound, offset);
@@ -80,12 +80,15 @@ public class DialogueBoxWidget : Widget
 
     public override bool TryReceiveRightClick(int x, int y, bool playSound, Point offset)
     {
-        throw new System.NotImplementedException();
+        if (!ContainsPoint(x, y, offset)) return false;
+        offset += Rect.Location;
+
+        return Child.TryReceiveRightClick(x, y, playSound, offset);
     }
 
     public override bool TryReceiveScrollWheelAction(int x, int y, int direction, Point offset)
     {
-        if (!Rect.Contains(x, y)) return false;
+        if (!ContainsPoint(x, y, offset)) return false;
         offset += Rect.Location;
 
         return Child.TryReceiveScrollWheelAction(x, y, direction, offset);

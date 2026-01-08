@@ -4,14 +4,15 @@ using StardewValley;
 using StardewValley.Menus;
 using Common.UI;
 using System.Linq;
+using StardewModdingAPI;
 
 namespace DevTools;
 
 public class WarpInterface : IClickableMenu
 {
-    private DialogueBoxWidget Menu;
+    private readonly DialogueBoxWidget Menu;
 
-    public WarpInterface()
+    public WarpInterface(IMonitor monitor)
     {
         initialize(0, 0, Game1.uiViewport.Width, Game1.uiViewport.Height);
 
@@ -20,7 +21,17 @@ public class WarpInterface : IClickableMenu
             Title = "Warps",
             Child = new ScrollViewWidget()
             {
-                Children = Game1.locations.Select(l => new TextWidget() { Data = l.Name }).ToArray(),
+                Children = Game1.locations.Select(l => 
+                {
+                    return new ButtonWidget()
+                    {
+                        Child = new TextWidget() { Data = l.Name },
+                        OnLeftClick = () =>
+                        {
+                            monitor.Log($"{l.Name} left clicked", LogLevel.Debug);
+                        }
+                    };
+                }).ToArray(),
                 Gap = 10,
             }
         };

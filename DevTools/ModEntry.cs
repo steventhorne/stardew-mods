@@ -17,6 +17,6 @@ internal sealed class ModEntry : Mod
         if (Game1.activeClickableMenu != null || (!Context.IsPlayerFree)) return;
         if (e.Button != SButton.OemTilde) return;
 
-        Game1.activeClickableMenu = new WarpInterface();
+        Game1.activeClickableMenu = new WarpInterface(Monitor);
     }
 }
