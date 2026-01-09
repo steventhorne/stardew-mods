@@ -3,3 +3,7 @@ QuickHeal is a simple QoL mod that adds a keybind (default: H) that will consume
 This will bypass the prompt that asks you if you're sure you want to eat this, so that you can avoid needing to confirm.
 
 This is especially useful in Multiplayer where the game does not pause while asking you if you want to eat it.
+
+# Additional Configuration
+With [Generic Mod Config Menu](https://www.nexusmods.com/stardewvalley/mods/5098) the following config options are available:
+- Keybind (default: H) - Allows you to change the default keybind used to heal

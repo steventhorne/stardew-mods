@@ -1,10 +1,10 @@
 {
     "Name": "InstantShaft",
     "Author": "steventhorne",
-    "Version": "1.0.1",
+    "Version": "1.0.2",
     "Description": "Skips the confirmation popup for going down mine shafts.",
     "UniqueID": "steventhorne.InstantShaft",
     "EntryDll": "InstantShaft.dll",
     "MinimumApiVersion": "4.0.0",
-    "UpdateKeys": []
+    "UpdateKeys": ["Nexus:40044"]
 }

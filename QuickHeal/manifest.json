@@ -1,10 +1,10 @@
 {
     "Name": "QuickHeal",
     "Author": "steventhorne",
-    "Version": "1.0.1",
+    "Version": "1.0.2",
     "Description": "Adds a keybind to quickly eat food without a confirmation popup.",
     "UniqueID": "steventhorne.QuickHeal",
     "EntryDll": "QuickHeal.dll",
     "MinimumApiVersion": "4.0.0",
-    "UpdateKeys": []
+    "UpdateKeys": ["Nexus:40041"]
 }
