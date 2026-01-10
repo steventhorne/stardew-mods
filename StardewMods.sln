@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTools", "DevTools\DevToo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickHorse", "QuickHorse\QuickHorse.csproj", "{B474D17A-248B-4F20-B531-3178836E214F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NpcHud", "NpcHud\NpcHud.csproj", "{05F394F3-229C-4011-A8BF-A89F6FE17945}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{B474D17A-248B-4F20-B531-3178836E214F}.Release|x64.Build.0 = Release|Any CPU
 		{B474D17A-248B-4F20-B531-3178836E214F}.Release|x86.ActiveCfg = Release|Any CPU
 		{B474D17A-248B-4F20-B531-3178836E214F}.Release|x86.Build.0 = Release|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Debug|x64.Build.0 = Debug|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Debug|x86.Build.0 = Debug|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Release|x64.ActiveCfg = Release|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Release|x64.Build.0 = Release|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Release|x86.ActiveCfg = Release|Any CPU
+		{05F394F3-229C-4011-A8BF-A89F6FE17945}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

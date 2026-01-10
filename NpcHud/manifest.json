@@ -1,0 +1,10 @@
+{
+    "Name": "NpcHud",
+    "Author": "steventhorne",
+    "Version": "1.0.0",
+    "Description": "Provides additional information about NPCs on the HUD.",
+    "UniqueID": "steventhorne.NpcHud",
+    "EntryDll": "NpcHud.dll",
+    "MinimumApiVersion": "4.0.0",
+    "UpdateKeys": ["Nexus:41007"]
+}
