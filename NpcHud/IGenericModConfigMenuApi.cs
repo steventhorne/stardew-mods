@@ -13,7 +13,7 @@ namespace GenericModConfigMenu
         void Register(IManifest mod, Action reset, Action save, bool titleScreenOnly = false);
 
 
-        // void AddSectionTitle(IManifest mod, Func<string> text, Func<string> tooltip = null);
+        void AddSectionTitle(IManifest mod, Func<string> text, Func<string> tooltip = null);
 
         // void AddSubHeader(IManifest mod, Func<string> text);
 

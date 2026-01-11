@@ -9,14 +9,21 @@ The following information is added via this mod:
 
 # Additional Configuration
 With [Generic Mod Config Menu](https://www.nexusmods.com/stardewvalley/mods/5098) the following config options are available:
-- Show On-Screen Names (default: false) - Toggle to show NPC names when they are on screen
-- Show On-Screen Gift Indicator (default: true) - Toggle to show gift indicator when NPCs are on screen
-- Show On-Screen Talk Indicator (default: false) - Toggle to show talk indicator when NPCs are on screen
-- Show On-Screen Birthday Indicator (default: true) - Toggle to show birthday indicator when NPCs are on screen
-- Show Off-Screen Icons (default: true) - Toggle to show icons on edge of screen when NPCs are nearby in the same location
-- Show Off-Screen Names on Hover (default: true) - Toggle to show NPC names when hovering over off-screen icons
-- Show Off-Screen Gift Indicator (default: true) - Toggle to show gift indicator on off-screen icons
-- Show Off-Screen Talk Indicator (default: false) - Toggle to show talk indicator on off-screen icons
-- Show Off-Screen Birthday Indicator (default: true) - Toggle to show birthday indicator on off-screen icons
-- Icon Scale (default: 1.0) - Adjust the scale of the off-screen icons
-- Safe Zone Margin (default: 15) - Adjust the distance from the edge of the screen that off-screen icons will be drawn
+## General Options
+- Show Badges On Hover (default: false) - Only show gift/talk/birthday badges when hovering over the NPC or tracker.
+- Badge Scale (%) (default: 1.0) - The scale of the gift/talk/birthday badges.
+
+## On-Screen Options
+- Show Names (default: false) - Show NPC names below their feet when they are on-screen.
+- Show Gift Badge (default: true) - Show a badge on NPCs if you can give them a gift today.
+- Show Talk Badge (default: false) - Show a badge on NPCs if you haven't talked to them today.
+- Show Birthday Badge (default: true) - Show a badge on NPCs if it's their birthday.
+
+## Off-Screen Options
+- Show Trackers (default: true) - Show indicators at the edge of the screen for off-screen NPCs.
+- Tracker Scale (%) (default: 1.0) - The scale of the off-screen NPC trackers. 
+- Tracker Safe Zone (default: 15) - The distance from the edge of the screen that trackers will stay within. 
+- Show Names On Hover (default: true) - Show NPC names when hovering over off-screen trackers.
+- Show Gift Badge (default: true) - Show a badge on off-screen trackers if you can give the NPC a gift today.
+- Show Talk Badge (default: false) - Show a badge on off-screen trackers if you haven't talked to the NPC today.
+- Show Birthday Badge (default: true) - Show a badge on off-screen trackers if it's the NPC's birthday.
