@@ -13,6 +13,7 @@ public sealed class ModConfig
     // General
     public bool ShowBadgesOnHover { get; set; } = false;
     public float BadgeScale { get; set; } = 1.0f;
+    public bool HideBadgesIfMaxedFriendship { get; set; } = true;
 
     // On-Screen
     public bool ShowOnScreenNames { get; set; } = false;
@@ -97,6 +98,14 @@ internal sealed class ModEntry : Mod
             min: 0.1f,
             max: 4.0f,
             interval: 0.1f
+        );
+
+        configMenu.AddBoolOption(
+            mod: ModManifest,
+            name: () => "Hide Badges If Maxed Friendship",
+            tooltip: () => "Don't show gift/talk badges for NPCs with max friendship.",
+            getValue: () => Config.HideBadgesIfMaxedFriendship,
+            setValue: value => Config.HideBadgesIfMaxedFriendship = value
         );
 
         configMenu.AddSectionTitle(
@@ -227,6 +236,8 @@ internal sealed class ModEntry : Mod
                 && (friendshipData.GiftsThisWeek < 2
                     || Game1.player.spouse == character.Name
                     || character.isBirthday());
+            var maxHearts = Utility.GetMaximumHeartsForCharacter(character);
+            var isMaxedFriendship = friendshipData.Points >= maxHearts * 250;
 
             var origcharPos = character.getLocalPosition(Game1.viewport);
             var charPos = new Vector2(origcharPos.X + (Game1.tileSize / 2), origcharPos.Y + Game1.tileSize);
@@ -252,7 +263,7 @@ internal sealed class ModEntry : Mod
                 }
 
                 var charBottom = Utility.ModifyCoordinatesForUIScale(charPos);
-                if (Config.ShowOnScreenGiftBadge && (hovering || !Config.ShowBadgesOnHover))
+                if (Config.ShowOnScreenGiftBadge && (hovering || !Config.ShowBadgesOnHover) && (!Config.HideBadgesIfMaxedFriendship || !isMaxedFriendship))
                 {
                     if (canGift)
                     {
@@ -261,7 +272,7 @@ internal sealed class ModEntry : Mod
                     }
                 }
 
-                if (Config.ShowOnScreenTalkBadge && !friendshipData.TalkedToToday && (hovering || !Config.ShowBadgesOnHover))
+                if (Config.ShowOnScreenTalkBadge && !friendshipData.TalkedToToday && (hovering || !Config.ShowBadgesOnHover) && (!Config.HideBadgesIfMaxedFriendship || !isMaxedFriendship))
                 {
                     var talkIconRect = new Rectangle((int)charBottom.X - (int)(BadgeSizeScaled * 1.75f), (int)charBottom.Y - BadgeSizeScaled, BadgeSizeScaled, BadgeSizeScaled);
                     b.Draw(Game1.mouseCursors2, talkIconRect, TALK_ICON_SOURCE_RECT, Color.White);
@@ -313,7 +324,7 @@ internal sealed class ModEntry : Mod
                     Game1.textShadowDarkerColor = oldShadowColor;
                 }
 
-                if (Config.ShowOffScreenGiftBadge && (hovering || !Config.ShowBadgesOnHover))
+                if (Config.ShowOffScreenGiftBadge && (hovering || !Config.ShowBadgesOnHover) && (!Config.HideBadgesIfMaxedFriendship || !isMaxedFriendship))
                 {
                     if (canGift)
                     {
@@ -322,7 +333,7 @@ internal sealed class ModEntry : Mod
                     }
                 }
 
-                if (Config.ShowOffScreenTalkBadge && !friendshipData.TalkedToToday && (hovering || !Config.ShowBadgesOnHover))
+                if (Config.ShowOffScreenTalkBadge && !friendshipData.TalkedToToday && (hovering || !Config.ShowBadgesOnHover) && (!Config.HideBadgesIfMaxedFriendship || !isMaxedFriendship))
                 {
                     var talkIconRect = new Rectangle(drawRect.Center.X - (int)(BadgeSizeScaled * 1.75f), drawRect.Bottom - BadgeSizeScaled + 10, BadgeSizeScaled, BadgeSizeScaled);
                     b.Draw(Game1.mouseCursors2, talkIconRect, TALK_ICON_SOURCE_RECT, Color.White);

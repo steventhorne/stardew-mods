@@ -12,6 +12,7 @@ With [Generic Mod Config Menu](https://www.nexusmods.com/stardewvalley/mods/5098
 ## General Options
 - Show Badges On Hover (default: false) - Only show gift/talk/birthday badges when hovering over the NPC or tracker.
 - Badge Scale (%) (default: 1.0) - The scale of the gift/talk/birthday badges.
+- Hide Badges If Maxed Friendship (default: true) - Hide gift/talk badges for NPCs with max friendship.
 
 ## On-Screen Options
 - Show Names (default: false) - Show NPC names below their feet when they are on-screen.
