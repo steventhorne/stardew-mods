@@ -1,7 +1,7 @@
 {
     "Name": "NpcHud",
     "Author": "steventhorne",
-    "Version": "1.0.3",
+    "Version": "1.0.4",
     "Description": "Provides additional information about NPCs on the HUD.",
     "UniqueID": "steventhorne.NpcHud",
     "EntryDll": "NpcHud.dll",
